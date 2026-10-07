@@ -1,16 +1,16 @@
-# 🍔 Sistema Visual do Cliente - Smash Burger & Co.
+# Sistema Visual do Cliente - Smash Burger & Co.
 
 Interface do cliente para visualização do cardápio digital interativo, personalização de lanches, carrinho de compras, cálculo de entregas e acompanhamento de pedidos em tempo real.
 
 ---
 
-## 🔗 Repositório Relacionado
+## Repositório Relacionado
 
 - **Painel Administrativo**: [visual-lanches-adm](https://github.com/IagoCrs/visual-lanches-adm)
 
 ---
 
-## 📁 Arquitetura e Padronização de Pastas
+## Arquitetura e Padronização de Pastas
 
 Este projeto utiliza **Next.js 16 (App Router)** com **TypeScript** e **Tailwind CSS**. A estrutura de pastas segue o padrão unificado entre os dois repositórios:
 
@@ -31,7 +31,7 @@ visual-lanches-pedidos/
 
 ---
 
-## 🚀 Como Instalar e Rodar o Projeto (Do Zero)
+## Como Instalar e Rodar o Projeto (Do Zero)
 
 ### Pré-requisitos
 - **Node.js** >= 18.x
@@ -55,12 +55,9 @@ visual-lanches-pedidos/
    npm run dev
    ```
 
-4. **Acessar no navegador**:
-   Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
-
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Next.js 16 (App Router)**
 - **React 19**
