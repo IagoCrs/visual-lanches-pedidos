@@ -6,7 +6,7 @@ Interface do cliente para visualização do cardápio digital interativo, person
 
 ## Repositório Relacionado
 
-- **Painel Administrativo**: [visual-lanches-adm](https://github.com/IagoCrs/visual-lanches-adm)
+- **Painel Administrativo**: https://github.com/IagoCrs/visual-lanches-adm
 
 ---
 
