@@ -1,4 +1,5 @@
-# Sistema Visual do Cliente - Visual Lanches.
+# Sistema Visual do Cliente - Visual Lanches
+
 
 Interface do cliente para visualização do cardápio digital interativo, personalização de lanches, carrinho de compras, cálculo de entregas e acompanhamento de pedidos em tempo real.
 
