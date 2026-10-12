@@ -23,7 +23,11 @@ let mockPedidos: any[] = [];
 
 let mockLojaStatus = {
     aberta: true,
-    mensagem: 'Loja aberta e aceitando pedidos',
+    horarioAbertura: '18:00',
+    tempoEntrega: '35-50 min',
+    taxaEntregaAPartirDe: 'R$ 5,00',
+    pedidoMinimo: 'R$ 20,00',
+    mensagem: 'Aceitando pedidos agora',
 };
 
 
