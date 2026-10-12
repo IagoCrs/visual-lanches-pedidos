@@ -13,17 +13,19 @@ export const CategoryChip = ({ label, icon, active = false, onClick }: CategoryC
       onClick={onClick}
       className="flex flex-col items-center gap-1.5 cursor-pointer group focus:outline-none transition-transform active:scale-95 min-w-[70px]"
     >
-      {/* 1. Círculo do Ícone (Em Cima) */}
+      {/* Círculo do Ícone */}
       <div
-        className={`w-14 h-14 rounded-full flex items-center justify-center text-xl transition-all duration-200 shadow-sm group-hover:shadow-md ${active
-            ? 'bg-brand-yellow text-brand-black scale-105 shadow-md font-bold'
-            : 'bg-white text-gray-700 hover:bg-gray-50 border border-black/5'
+        className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm group-hover:shadow-md ${active
+            ? 'bg-brand-yellow text-brand-black scale-105 shadow-md'
+            : 'bg-white text-amber-500 hover:bg-amber-50/50 border border-black/5'
           }`}
       >
-        {icon || <span>🍔</span>}
+        <div className="w-6 h-6 flex items-center justify-center">
+          {icon}
+        </div>
       </div>
 
-      {/* 2. Texto do Nome (Em Baixo) */}
+      {/* Texto em Baixo */}
       <span
         className={`text-xs tracking-tight transition-colors ${active
             ? 'text-amber-600 font-bold'

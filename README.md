@@ -58,6 +58,27 @@ visual-lanches-pedidos/
 
 ---
 
+## Configuração de Fonte de Dados (Mock vs Banco de Dados)
+
+O projeto possui uma camada centralizada de integração em [api.ts](file:///c:/Users/Usuario/Documents/Trabalhos/Sistema-Visual/src/services/api.ts). Você pode alternar entre o modo de simulação em memória (Mock) e banco de dados real através das variáveis de ambiente no arquivo `.env`:
+
+```env
+# Fonte dos dados: 'mock' ou 'database'
+NEXT_PUBLIC_DATA_SOURCE=mock
+
+# Simulação de erros na API mockada para testes de interface (true / false)
+NEXT_PUBLIC_MOCK_SIMULATE_ERROR=false
+
+# Link do banco ou API externa (utilizado quando NEXT_PUBLIC_DATA_SOURCE=database)
+NEXT_PUBLIC_API_URL=
+```
+
+- **Modo `mock`**: Carrega dados simulados com latência realista (~1 segundo) e mantém alterações na memória da sessão.
+- **Modo `database`**: Encaminha chamadas para o link configurado (exibe *"Banco ainda não configurado"* enquanto o backend não estiver integrado).
+- **Simulação de erro (`NEXT_PUBLIC_MOCK_SIMULATE_ERROR=true`)**: Força as funções a retornarem respostas de erro para validação dos estados de erro das telas.
+
+---
+
 ## Tecnologias Utilizadas
 
 - **Next.js 16 (App Router)**
