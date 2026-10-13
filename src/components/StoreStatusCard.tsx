@@ -76,7 +76,7 @@ export const StoreStatusCard: React.FC = () => {
                     Aberto agora
                 </span>
                 <span className="text-xs text-gray-500">
-                    Mínimo: <strong>{status.pedidoMinimo}</strong>
+                    Mínimo: <strong>{(status.pedidoMinimoCentavos / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
                 </span>
             </div>
 
@@ -87,7 +87,7 @@ export const StoreStatusCard: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1.5">
                     <Bike size={14} className="text-amber-500" />
-                    <span>Entrega a partir de {status.taxaEntregaAPartirDe}</span>
+                    <span>Entrega a partir de {(status.taxaMinimaCentavos / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                 </div>
             </div>
         </Card>

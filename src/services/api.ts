@@ -1,4 +1,11 @@
-// src/services/api.ts
+import {
+    mockCategorias as initialCategorias,
+    mockProdutos as initialProdutos,
+    mockPedidosPainel as initialPedidos,
+    mockLojaStatus as initialLojaStatus,
+    mockAgendados as initialAgendados,
+    mockDashboard,
+} from '@/data/mockData';
 import { ENV } from '../config/env';
 import { ApiResponse } from '../types/cliente';
 
@@ -15,20 +22,11 @@ function errorResponse<T>(message: string): ApiResponse<T> {
 }
 
 // Estrutura de dados em memória para o mock
-let mockProdutos: any[] = [];
-
-let mockCategorias: any[] = [];
-
-let mockPedidos: any[] = [];
-
-let mockLojaStatus = {
-    aberta: true,
-    horarioAbertura: '18:00',
-    tempoEntrega: '35-50 min',
-    taxaEntregaAPartirDe: 'R$ 5,00',
-    pedidoMinimo: 'R$ 20,00',
-    mensagem: 'Aceitando pedidos agora',
-};
+let mockProdutos = [...initialProdutos];
+let mockCategorias = [...initialCategorias];
+let mockPedidos: any[] = [...initialPedidos];
+let mockAgendados = [...initialAgendados];
+let mockLojaStatus = { ...initialLojaStatus };
 
 
 
@@ -202,9 +200,7 @@ export const api = {
             return errorResponse('Erro simulado ao carregar pedidos agendados.');
         }
 
-        const agendados = mockPedidos.filter((pedido) => pedido.agendado === true);
-
-        return successResponse(agendados);
+        return successResponse(mockAgendados);
     },
 
     // Buscar Dados do Dashboard
@@ -219,12 +215,6 @@ export const api = {
             return errorResponse('Erro simulado ao carregar dados do dashboard.');
         }
 
-        const dashboard = {
-            totalPedidos: mockPedidos.length,
-            pedidosPendentes: mockPedidos.filter((p) => p.status === 'pendente').length,
-            faturamentoTotal: mockPedidos.reduce((total, p) => total + (p.total || 0), 0),
-        };
-
-        return successResponse(dashboard);
+        return successResponse(mockDashboard);
     },
 };
