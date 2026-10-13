@@ -28,13 +28,39 @@ let mockPedidos: any[] = [...initialPedidos];
 let mockAgendados = [...initialAgendados];
 let mockLojaStatus = { ...initialLojaStatus };
 
+interface Handlers<T> {
+    mock: () => T | Promise<T>;
+    database?: () => T | Promise<T>;
+}
+ 
+async function resolver<T>(operacao: string, handlers: Handlers<T>): Promise<ApiResponse<T>> {
+    try {
+        if (ENV.dataSource === 'database') {
+            if (!handlers.database) {
+                return errorResponse('Banco ainda não configurado');
+            }
+            return successResponse(await handlers.database());
+        }
+ 
+        // Modo MOCK
+        await delay(1000); // 1 segundo para o loading aparecer
+ 
+        if (ENV.simulateMockError) {
+            return errorResponse(`Erro simulado ao ${operacao}.`);
+        }
+ 
+        return successResponse(await handlers.mock());
+    } catch (err) {
+        return errorResponse(err instanceof Error ? err.message : 'Erro inesperado.');
+    }
+}
 
 
 // As funções que as telas vão consumir
 export const api = {
     // Buscar Categorias
     async buscarCategorias(): Promise<ApiResponse<any[]>> {
-        // Se for modo DATABASE:
+        /* // Se for modo DATABASE:
         if (ENV.dataSource === 'database') {
             return errorResponse('Banco ainda não configurado');
         }
@@ -46,7 +72,11 @@ export const api = {
             return errorResponse('Erro simulado ao carregar categorias.');
         }
 
-        return successResponse(mockCategorias);
+        return successResponse(mockCategorias); */
+
+        return resolver('carregar categorias', {
+            mock: () => mockCategorias,
+        });
     },
 
     // Buscar Produtos
