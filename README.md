@@ -76,7 +76,6 @@ NEXT_PUBLIC_API_URL=
 - **Modo `mock`**: Carrega dados simulados com latência realista (~1 segundo) e mantém alterações na memória da sessão.
 - **Modo `database`**: Encaminha chamadas para o link configurado (exibe *"Banco ainda não configurado"* enquanto o backend não estiver integrado).
 - **Simulação de erro (`NEXT_PUBLIC_MOCK_SIMULATE_ERROR=true`)**: Força as funções a retornarem respostas de erro para validação dos estados de erro das telas.
-
 ---
 
 ## Tecnologias Utilizadas

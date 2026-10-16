@@ -1,6 +1,8 @@
 import { Header } from '@/components/Header';
 import { StoreStatusCard } from '@/components/StoreStatusCard';
 import { PromoBanner } from '@/components/PromoBanner';
+import { CategoryNav } from '@/components/CategoryNav';
+
 
 
 export default function Home() {
@@ -15,7 +17,7 @@ export default function Home() {
                 <StoreStatusCard />
 
                 {/* 1. Banner Promocional*/}
-                <section id="area-banner" className="cover">
+                <section id="area-banner" className="w-full">
                     <PromoBanner />
                 </section>
 
@@ -27,11 +29,7 @@ export default function Home() {
                 </section>
 
                 {/* 3. Placeholder para CLI-03: Categorias */}
-                <section id="area-categorias" className="w-full">
-                    <div className="h-16 bg-white rounded-xl border border-dashed border-gray-300 flex items-center justify-center text-xs text-gray-400">
-                        [CLI-03] Categorias de Lanches
-                    </div>
-                </section>
+                <CategoryNav />
 
                 {/* 4. Placeholder para CLI-04: Lista de Lanches */}
                 <section id="area-cardapio" className="w-full flex-1">

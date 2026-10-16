@@ -8,6 +8,12 @@ export const mockCategorias: Categoria[] = [
     { id: 'porcoes', nome: 'Porções', icone: '🍟' },
     { id: 'bebidas', nome: 'Bebidas', icone: '🥤' },
     { id: 'sobremesas', nome: 'Sobremesas', icone: '🍦' },
+    { id: 'promocoes', nome: 'Promoções', icone: '🏷️' },
+    { id: 'doces', nome: 'Doces', icone: '🍫' },
+    { id: 'kids', nome: 'Kids', icone: '👶' },
+    { id: 'molhos', nome: 'Molhos', icone: '🥫' },
+    { id: 'tabuas', nome: 'Tábuas', icone: '🍢' },
+    { id: 'gelo', nome: 'Gelo', icone: '🧊' },
 ];
 
 // 2. Grupos de adicionais reutilizáveis
