@@ -32,7 +32,7 @@ interface Handlers<T> {
     mock: () => T | Promise<T>;
     database?: () => T | Promise<T>;
 }
- 
+
 async function resolver<T>(operacao: string, handlers: Handlers<T>): Promise<ApiResponse<T>> {
     try {
         if (ENV.dataSource === 'database') {
@@ -41,14 +41,14 @@ async function resolver<T>(operacao: string, handlers: Handlers<T>): Promise<Api
             }
             return successResponse(await handlers.database());
         }
- 
+
         // Modo MOCK
         await delay(1000); // 1 segundo para o loading aparecer
- 
+
         if (ENV.simulateMockError) {
             return errorResponse(`Erro simulado ao ${operacao}.`);
         }
- 
+
         return successResponse(await handlers.mock());
     } catch (err) {
         return errorResponse(err instanceof Error ? err.message : 'Erro inesperado.');
@@ -56,195 +56,119 @@ async function resolver<T>(operacao: string, handlers: Handlers<T>): Promise<Api
 }
 
 
+
+
 // As funções que as telas vão consumir
 export const api = {
     // Buscar Categorias
     async buscarCategorias(): Promise<ApiResponse<any[]>> {
-        /* // Se for modo DATABASE:
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
-
-        // Se for modo MOCK:
-        await delay(1000); // 1 segundo para loading aparecer
-
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao carregar categorias.');
-        }
-
-        return successResponse(mockCategorias); */
-
-        return resolver('carregar categorias', {
+        return resolver('Carregar Categorias', {
             mock: () => mockCategorias,
         });
     },
 
     // Buscar Produtos
     async buscarProdutos(): Promise<ApiResponse<any[]>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
-
-        await delay(1000);
-
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao carregar produtos.');
-        }
-
-        return successResponse(mockProdutos);
+        return resolver('Carregar Produtos', {
+            mock: () => mockProdutos,
+        });
     },
 
     // Atualizar Produto
     async atualizarProduto(id: string, novosDados: any): Promise<ApiResponse<any>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
+        return resolver('Atualizar Produto', {
+            mock: () => {
+                // Atualiza na variável em memória
+                mockProdutos = mockProdutos.map((item) =>
+                    item.id === id ? { ...item, ...novosDados } : item
+                );
 
-        await delay(1000);
-
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao atualizar produto.');
-        }
-
-        // Atualiza na variável em memória
-        mockProdutos = mockProdutos.map((item) =>
-            item.id === id ? { ...item, ...novosDados } : item
-        );
-
-        return successResponse({ id, ...novosDados });
+                return { id, ...novosDados };
+            },
+        });
     },
 
     // Buscar Status da Loja
     async buscarStatusLoja(): Promise<ApiResponse<any>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
-
-        await delay(1000);
-
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao carregar status da loja.');
-        }
-
-        return successResponse(mockLojaStatus);
+        return resolver('Buscar Status da Loja', {
+            mock: () => mockLojaStatus,
+        });
     },
 
     // Criar Pedido
     async criarPedido(dadosPedido: any): Promise<ApiResponse<any>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
+        return resolver('Criar Pedido', {
+            mock: () => {
+                const novoPedido = {
+                    id: String(Date.now()),
+                    criadoEm: new Date().toISOString(),
+                    status: 'pendente',
+                    ...dadosPedido,
+                };
 
-        await delay(1000);
+                mockPedidos.unshift(novoPedido);
 
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao criar pedido.');
-        }
-
-        const novoPedido = {
-            id: String(Date.now()),
-            criadoEm: new Date().toISOString(),
-            status: 'pendente',
-            ...dadosPedido,
-        };
-
-        mockPedidos.unshift(novoPedido);
-
-        return successResponse(novoPedido);
+                return novoPedido;
+            },
+        });
     },
 
     // Buscar Pedido
     async buscarPedido(id: string): Promise<ApiResponse<any>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
+        return resolver('Buscar Pedido', {
+            mock: () => {
+                const pedido = mockPedidos.find((item) => item.id === id);
 
-        await delay(1000);
+                if (!pedido) {
+                    throw new Error('Pedido não encontrado.');
+                }
 
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao buscar pedido.');
-        }
-
-        const pedido = mockPedidos.find((item) => item.id === id);
-
-        if (!pedido) {
-            return errorResponse('Pedido não encontrado.');
-        }
-
-        return successResponse(pedido);
+                return pedido;
+            },
+        });
     },
 
     // Buscar Pedidos do Painel
     async buscarPedidosPainel(): Promise<ApiResponse<any[]>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
-
-        await delay(1000);
-
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao carregar pedidos do painel.');
-        }
-
-        return successResponse(mockPedidos);
+        return resolver('Buscar Pedidos do Painel', {
+            mock: () => mockPedidos,
+        });
     },
 
     // Mudar Status do Pedido
     async mudarStatusPedido(id: string, novoStatus: string): Promise<ApiResponse<any>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
+        return resolver('Mudar Status do Pedido', {
+            mock: () => {
+                let pedidoAtualizado = null;
 
-        await delay(1000);
+                mockPedidos = mockPedidos.map((pedido) => {
+                    if (pedido.id === id) {
+                        pedidoAtualizado = { ...pedido, status: novoStatus };
+                        return pedidoAtualizado;
+                    }
+                    return pedido;
+                });
 
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao mudar status do pedido.');
-        }
+                if (!pedidoAtualizado) {
+                    throw new Error('Pedido não encontrado.');
+                }
 
-        let pedidoAtualizado = null;
-
-        mockPedidos = mockPedidos.map((pedido) => {
-            if (pedido.id === id) {
-                pedidoAtualizado = { ...pedido, status: novoStatus };
                 return pedidoAtualizado;
-            }
-            return pedido;
+            },
         });
-
-        if (!pedidoAtualizado) {
-            return errorResponse('Pedido não encontrado.');
-        }
-
-        return successResponse(pedidoAtualizado);
     },
 
     // Buscar Agendados
     async buscarAgendados(): Promise<ApiResponse<any[]>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
-
-        await delay(1000);
-
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao carregar pedidos agendados.');
-        }
-
-        return successResponse(mockAgendados);
+        return resolver('Buscar Agendados', {
+            mock: () => mockAgendados,
+        });
     },
 
     // Buscar Dados do Dashboard
     async buscarDadosDashboard(): Promise<ApiResponse<any>> {
-        if (ENV.dataSource === 'database') {
-            return errorResponse('Banco ainda não configurado');
-        }
-
-        await delay(1000);
-
-        if (ENV.simulateMockError) {
-            return errorResponse('Erro simulado ao carregar dados do dashboard.');
-        }
-
-        return successResponse(mockDashboard);
+        return resolver('Buscar Dados do Dashboard', {
+            mock: () => mockDashboard,
+        });
     },
 };
