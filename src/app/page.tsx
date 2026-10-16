@@ -1,7 +1,10 @@
+'use client';
+
 import { Header } from '@/components/Header';
 import { StoreStatusCard } from '@/components/StoreStatusCard';
 import { PromoBanner } from '@/components/PromoBanner';
 import { CategoryNav } from '@/components/CategoryNav';
+import { ProductList } from '@/components/ProductList';
 
 
 
@@ -33,9 +36,7 @@ export default function Home() {
 
                 {/* 4. Placeholder para CLI-04: Lista de Lanches */}
                 <section id="area-cardapio" className="w-full flex-1">
-                    <div className="h-64 bg-white rounded-xl border border-dashed border-gray-300 flex items-center justify-center text-xs text-gray-400">
-                        [CLI-04] Lista de Lanches do Cardápio
-                    </div>
+                    <ProductList onSelectProduct={(prod) => console.log('Abrir CLI-06:', prod)} />
                 </section>
             </main>
         </div>

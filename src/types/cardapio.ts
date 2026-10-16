@@ -21,6 +21,7 @@ export interface Produto {
     precoCentavos: number;
     imagemUrl?: string;
     esgotado: boolean;
+    maisPedido?: boolean;
     canaisVenda: ('site' | 'ifood')[];
     gruposAdicionais?: GrupoAdicional[];
 }
