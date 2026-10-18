@@ -152,7 +152,7 @@ export function CategoryNav({ onSelectCategory }: CategoryNavProps) {
     return (
         <nav
             aria-label="Categorias do cardápio"
-            className="sticky top-[96px] z-20 bg-neutral-50/95 backdrop-blur-md py-3 -mx-4 px-4 border-b border-neutral-200/60 shadow-sm"
+            className="sticky top-[96px] z-20 bg-neutral-50/95 backdrop-blur-md py-3 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b border-neutral-200/60 shadow-sm"
         >
             <div className="flex items-center gap-4 overflow-x-auto scroll-smooth no-scrollbar py-1">
                 {categorias.map((cat) => (

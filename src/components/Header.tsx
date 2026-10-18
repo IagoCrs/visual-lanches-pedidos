@@ -14,8 +14,8 @@ export const Header: React.FC<HeaderProps> = ({
     onMeusPedidosClick,
 }) => {
     return (
-        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-black/5 px-4 py-3">
-            <div className="max-w-2xl mx-auto flex flex-col gap-2.5">
+        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-black/5 px-4 sm:px-6 lg:px-8 py-3.5">
+            <div className="max-w-6xl mx-auto flex flex-col gap-2.5">
                 {/* Linha 1: Logo e Ação Meus Pedidos */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
